@@ -12,10 +12,17 @@
 #define MMAX_CATEGORY_LENGTH 20
 #define DBNAME "test.db"
 
+void restInput();
 sqlite3* openDataBase(const char* filename);
+int isKoreanWhiteSpace(char c);
+void getRestName(char* name);
+void getRestRating(int* rating);
+void getRestCategory(char* category);
+int selectData(sqlite3* db);
 
 void restInput() {
 	sqlite3* db = openDataBase(DBNAME);
+	int rc = sqlite3_open(DBNAME, &db);
 
 	char restName[MAX_NAME_LENGTH];
 	int rating;
@@ -28,8 +35,66 @@ void restInput() {
 
 
 	printf("이름: %s, 별점: %d, 분류: %s", restName, rating, restCategory);
-	//�Էµ� ������ db�� insert
+	
+	//db에 추가 ----------
+	char sql[300];
+	char* err_msg = NULL;
+	sprintf(sql, "INSERT INTO RESTAURANT (NAME, RATING, CATEGORY) VALUES('%s', '%d', '%s');", restName, rating, restCategory);
+	rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
+	if (rc != SQLITE_OK)
+	{
+		fprintf(stderr, "SQL error: %s\n", err_msg);
+
+		sqlite3_free(err_msg);
+		sqlite3_close(db);
+		return 1;
+	}
+	//selectdata(db);
+
+
+
+	/// 데이터 조회 ------------------------------------------------
+	sqlite3_stmt* stmt;
+	const char* select_query = "SELECT * FROM restaurant;";
+
+	rc = sqlite3_prepare_v2(db, select_query, -1, &stmt, 0);
+
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+
+	printf("restaurant\tNAME\tRATING\tCATEGORY\n");
+
+	while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+		int restaurant_no = sqlite3_column_int(stmt, 0);
+		const unsigned char* name = sqlite3_column_text(stmt, 1);
+		int rating = sqlite3_column_int(stmt, 2);
+		const unsigned char* category = sqlite3_column_text(stmt, 3);
+
+		printf("%d\t%s\t%d\t%s\n", restaurant_no, name, rating, category);
+	}
+
+	sqlite3_finalize(stmt);
+
+	if (rc != SQLITE_DONE) {
+		fprintf(stderr, "Failed to fetch data: %s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+
+
+
+	//데이터 조회 --------------------------------
+
+	//sqlite3_close(db);
+
+
+
+
+
+
+	return 0;
 }
 
 sqlite3* openDataBase(const char* filename) {
@@ -53,7 +118,7 @@ int isKoreanWhiteSpace(char c) {
 	return (c == 0x0020 || c == 0x00A0 || (c >= 0x2000 && c <= 0x200A) || c == 0x3000);
 }
 
-getRestName(char* name) {
+void getRestName(char* name) {
 	char tmp[100];
 	int len;
 
@@ -79,13 +144,11 @@ getRestName(char* name) {
 
 		len = strlen(tmp);
 
-		//���� �� Ȯ��
 		if (len > MAX_NAME_LENGTH - 1) {
 			printf("이름이 너무 깁니다. %d자 이내로 입력해 주세요.\n", (MAX_NAME_LENGTH - 1));
 			continue;
 		}
 
-		// �Է°� Ȯ��
 		while (1) {
 			printf("이름 '%s'이 맞나요? (y/n): ", tmp);
 			char answer = getchar();
@@ -112,7 +175,7 @@ getRestName(char* name) {
 	}
 }
 
-getRestRating(int* rating) {
+void getRestRating(int* rating) {
 	//char tmp[100]; 
 	int input;
 
@@ -130,7 +193,7 @@ getRestRating(int* rating) {
 	}
 }
 
-getRestCategory(char* category) {
+void getRestCategory(char* category) {
 	int input;
 
 	while (1) {
@@ -158,4 +221,36 @@ getRestCategory(char* category) {
 			return;
 		}
 	}
+}
+
+int selectData(sqlite3* db) {
+	sqlite3_stmt* stmt;
+	const char* select_query = "SELECT * FROM restaurant;";
+
+	int rc = sqlite3_prepare_v2(db, select_query, -1, &stmt, 0);
+
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+
+	printf("restaurant\tNAME\tRATING\tCATEGORY\n");
+
+	while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+		int restaurant_no = sqlite3_column_int(stmt, 0);
+		const unsigned char* name = sqlite3_column_text(stmt, 1);
+		int rating = sqlite3_column_int(stmt, 2);
+		const unsigned char* category = sqlite3_column_text(stmt, 3);
+
+		printf("%d\t%s\t%d\t%s\n", restaurant_no, name, rating, category);
+	}
+
+	sqlite3_finalize(stmt);
+
+	if (rc != SQLITE_DONE) {
+		fprintf(stderr, "Failed to fetch data: %s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+
+	return SQLITE_OK;
 }
