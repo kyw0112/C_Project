@@ -4,6 +4,7 @@
 int main(void)
 {
     printf("%s\n", sqlite3_libversion());
-    signUp();
+    //signUp();
+    restInput();
     return 0;
 }
