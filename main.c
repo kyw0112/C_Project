@@ -5,6 +5,7 @@ int main(void)
 {
     printf("%s\n", sqlite3_libversion());
     //signUp();
-    restInput();
+    //restInput();
+    recomByCategory();
     return 0;
 }
