@@ -1,22 +1,23 @@
 //restInput
+// 새로운 식당 정보를 추가하는 기능을 구현합니다. (이름, 별점, 분류)
 
 #include <sqlite3.h>
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define MAX_NAME_LENGTH 51
 #define MAX_CATEGORY_LENGTH 20
-#define DBNAME "test.db"
+#define DBNAME "test.db" //추후 사용할 db의 이름으로 변경하면 됩니다. (csv 로드 할 db)
 
-void restInput();
-sqlite3* openDataBase(const char* filename);
-int isKoreanWhiteSpace(char c);
-void getRestName(char* name);
-void getRestRating(int* rating);
-void getRestCategory(char* category);
-int insertData(sqlite3* db, char* restName, int rating, char* restCategory);
+void restInput(); //아래 함수들을 호출하는 부모 함수.
+sqlite3* openDataBase(const char* filename);//db 접속 (에러 체크)
+int isKoreanWhiteSpace(char c); // 공백 입력 방지, 공백 체크 함수
+void getRestName(char* name);// 식당의 이름을 입력받습니다. (공백, 길이, 입력 재확인, db중복확인)
+void getRestRating(int* rating);//평점을 입력받습니다.(0~5점 입력 체크)
+void getRestCategory(char* category);//분류를 입력받습니다.(정수형 입력)
+int insertData(sqlite3* db, char* restName, int rating, char* restCategory);//입력값들을 통해 테이블에 행을 추가합니다.
 
 
 void restInput() {
@@ -27,11 +28,10 @@ void restInput() {
 	char restCategory[MAX_CATEGORY_LENGTH];
 
 	printf("새로운 식당 정보를 추가합니다!\n\n");
-	getRestName(restName,db);
+	getRestName(restName, db);
 	getRestRating(&rating);
 	getRestCategory(restCategory);
 	insertData(db, restName, rating, restCategory);
-
 
 	sqlite3_close(db);
 	return 0;
@@ -48,7 +48,6 @@ sqlite3* openDataBase(const char* filename) {
 		sqlite3_close(db);
 		return 1;
 	}
-
 	return db;
 }
 
@@ -58,16 +57,15 @@ int isKoreanWhiteSpace(char c) {
 }
 
 void getRestName(char* name, sqlite3* db) {
-	char tmp[100];
-	int len;
+	char tmp[500];
 
 	while (1) {
 		printf("식당의 이름을 입력해주세요: ");
-		//memset(tmp, 0, sizeof(tmp));
-		fgets(tmp, sizeof(tmp), stdin);
-
-		tmp[strcspn(tmp, "\n")] = '\0';
+		memset(tmp, 0, sizeof(tmp));
 		fflush(stdin);
+
+		fgets(tmp, sizeof(tmp), stdin);
+		tmp[strcspn(tmp, "\n")] = '\0';
 
 		int validInput = 0;
 		for (int i = 0; tmp[i] != '\0'; i++) {
@@ -77,14 +75,12 @@ void getRestName(char* name, sqlite3* db) {
 			}
 		}
 		if (!validInput) {
-			printf("공백을 입력하셨습니다. 잘못된 입력입니다.\n");
+			printf("\t공백을 입력하셨습니다. 잘못된 입력입니다.\n\n");
 			continue;
 		}
 
-		len = strlen(tmp);
-
-		if (len > MAX_NAME_LENGTH - 1) {
-			printf("이름이 너무 깁니다. %d자 이내로 입력해 주세요.\n", (MAX_NAME_LENGTH - 1));
+		if (strlen(tmp) > MAX_NAME_LENGTH - 1) {
+			printf("\t이름이 너무 깁니다. %d자 이내로 입력해 주세요.\n\n", (MAX_NAME_LENGTH - 1));
 			continue;
 		}
 
@@ -94,29 +90,28 @@ void getRestName(char* name, sqlite3* db) {
 			while (getchar() != '\n');
 
 			if (toupper(answer) == 'Y') {
-				strcpy(name, tmp);
-
-				//------
 				char query[100];
-				sprintf(query, "SELECT NAME FROM RESTAURANT WHERE NAME = '%s'", name);
+				sprintf(query, "SELECT NAME FROM RESTAURANT WHERE NAME = '%s'", tmp);
 				sqlite3_stmt* stmt;
 				int rc = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
 				if (rc != SQLITE_OK) {
-					printf("쿼리 준비 중 오류가 발생했습니다.\n");
+					printf("\t쿼리 준비 중 오류가 발생했습니다.\n\n");
 					continue;
 				}
-				// 결과 확인
 				rc = sqlite3_step(stmt);
 				if (rc == SQLITE_ROW) {
-					printf("이미 존재하는 식당입니다.\n");
+					printf("\t이미 존재하는 식당입니다.\n\n");
 					break;
 				}
 				sqlite3_finalize(stmt);
+				strcpy(name, tmp);
 				return;
-			} else if (toupper(answer) == 'N') {
+			}
+			else if (toupper(answer) == 'N') {
 				break;
-			} else {
-				printf("잘못된 입력입니다.. y/n 중에 입력해주세요.\n");
+			}
+			else {
+				printf("\t잘못된 입력입니다.. y/n 중에 입력해주세요.\n\n");
 				continue;
 			}
 		}
@@ -130,7 +125,7 @@ void getRestRating(int* rating) {
 		printf("식당의 별점을 0점에서 5점 사이로 입력해주세요!: ");
 
 		if (scanf("%d", &tmp) != 1 || tmp < 0 || tmp >5) {
-			printf("입력이 잘못되었습니다. 0 이상 5 이하의 값을 입력해주세요.\n"); // 한글 부분 수정
+			printf("\t입력이 잘못되었습니다. 0 이상 5 이하의 값을 입력해주세요.\n\n");
 			while (getchar() != '\n');
 		}
 		else {
@@ -144,25 +139,25 @@ void getRestCategory(char* category) {
 	int input;
 
 	while (1) {
-		printf("원하시는 음식 종류를 입력해주세요\n 1.한식 2.양식 3.중식 4.일식\n: "); // 한글 부분 수정
+		printf("식당 분류에 맞는 숫자를 입력해주세요\n 1.한식 2.양식 3.중식 4.일식\n: ");
 
 		if (scanf("%d", &input) != 1 || input < 0 || input >4) {
-			printf("입력이 잘못되었습니다. 음식 종류를 다시 입력해주세요.\n"); // 한글 부분 수정
+			printf("\t입력이 잘못되었습니다. 음식 종류를 다시 입력해주세요.\n\n");
 			while (getchar() != '\n');
 		}
 		else {
 			switch (input) {
 			case 1:
-				strcpy(category, "한식"); // 한글 부분 수정
+				strcpy(category, "한식");
 				break;
 			case 2:
-				strcpy(category, "양식"); // 한글 부분 수정
+				strcpy(category, "양식");
 				break;
 			case 3:
-				strcpy(category, "중식"); // 한글 부분 수정
+				strcpy(category, "중식");
 				break;
 			case 4:
-				strcpy(category, "일식"); // 한글 부분 수정
+				strcpy(category, "일식");
 				break;
 			}
 			return;
@@ -181,7 +176,6 @@ int insertData(sqlite3* db, char* restName, int rating, char* restCategory) {
 		fprintf(stderr, "SQL error: %s\n", err_msg);
 
 		sqlite3_free(err_msg);
-		//sqlite3_close(db);
 		return 1;
 	}
 	printf("이름: %s, 별점: %d, 분류: %s 이 잘 추가되었습니다! \n\n", restName, rating, restCategory);
