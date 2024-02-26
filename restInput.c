@@ -1,4 +1,5 @@
-//restInput
+// bj
+// restInput
 // 새로운 식당 정보를 추가하는 기능을 구현합니다. (이름, 별점, 분류)
 
 #include <sqlite3.h>
@@ -168,7 +169,7 @@ void getRestCategory(char* category) {
 int insertData(sqlite3* db, char* restName, int rating, char* restCategory) {
 	char sql[150];
 	char* err_msg = NULL;
-	sprintf(sql, "INSERT INTO RESTAURANT (NAME, RATING, CATEGORY) VALUES('%s', '%d', '%s');", restName, rating, restCategory);
+	sprintf(sql, "INSERT INTO RESTAURANT (NAME, RATING_SUM, CATEGORY, PEOPLE, RATING_AVG) VALUES('%s', '%d', '%s','%d','%lf');", restName, rating, restCategory,1,(double)rating);
 	int rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
 	if (rc != SQLITE_OK)

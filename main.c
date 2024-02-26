@@ -7,8 +7,8 @@ int main(void)
 {
     printf("%s\n", sqlite3_libversion());
     //signUp();
-    //restInput();
+    restInput();
     //recomByCategory("test1");
-    recomByCategory(MEMBERID);
+    //recomByCategory(MEMBERID);
     return 0;
 }

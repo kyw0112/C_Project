@@ -23,11 +23,6 @@ struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category);
 void recomByCategory(char * userId) {
 	char* id = userId; //로그인한 유저의 아이디를 받는다고 가정
 
-	//char id[200];
-	//strcpy(id, userId);
-
-
-	printf("카테고리 추천 부분의 유저 아이디 확인: %s", id);
 	sqlite3* db = openDataBase(DBNAME);
 	int condition = 1;
 
@@ -44,47 +39,24 @@ void recomByCategory(char * userId) {
 		else {
 			switch (input) {
 			case 1:
-				
-				//사용 후 restaurant 메모리 해제 시켜줘야함!!!
 				selectedRestaurant = selectFromRestaurant(db, "한식");
-				////해당 데이터에 대한 평가 로직 수행
-				//printf("잘 찍히나? 이름: %s, 평점: %lf, 분류: %s\n", selectedRestaurant->name, selectedRestaurant->rating_avg, selectedRestaurant->category);
-				//enterStoreRating(selectedRestaurant, id);
 				enterStoreRating(selectedRestaurant, id);
-
 				return;
 			case 2:
 				selectedRestaurant = selectFromRestaurant(db, "양식");
-				break;
+				enterStoreRating(selectedRestaurant, id);
+				return;
 			case 3:
 				selectedRestaurant = selectFromRestaurant(db, "중식");
-				break;
+				enterStoreRating(selectedRestaurant, id);
+				return;
 			case 4:
 				selectedRestaurant = selectFromRestaurant(db, "일식");
-				break;
+				enterStoreRating(selectedRestaurant, id);
+				return;
 			}
 		}
-
-		//while (1) {
-		//	printf("다른 카테고리도 확인해 보시겠어요? (y/n): ");
-		//	char answer;
-		//	scanf(" %c", &answer);
-
-		//	if (toupper(answer) == 'Y') {
-		//		break;
-		//	}
-		//	else if (toupper(answer) == 'N') {
-		//		condition = 0;
-		//		break;
-		//	}
-		//	else {
-		//		printf("\t잘못된 입력입니다.. y/n 중에 입력해주세요.\n\n");
-		//		while (getchar() != '\n');
-		//		continue;
-		//	}
-		//}
 	}
-
 	sqlite3_close(db);
 }
 
@@ -160,7 +132,6 @@ struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category) {
 	rc = sqlite3_step(stmt);
 	int row_count = 0;
 
-	//출력값을 받을 임시 배열
 	struct Restaurant* restaurants = malloc(5 * sizeof(struct Restaurant));
 	if (!restaurants) {
 		fprintf(stderr, "출력값 임시배열 할당에 실패했습니다.");
@@ -177,10 +148,6 @@ struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category) {
 			restaurants[row_count].rating_avg = sqlite3_column_double(stmt, 2);
 			restaurants[row_count].categoryAdr = sqlite3_column_text(stmt, 3);
 			strcpy(restaurants[row_count].category, restaurants[row_count].categoryAdr);
-			//const unsigned char* name = sqlite3_column_text(stmt, 0);
-			//double rating = sqlite3_column_double(stmt, 1);
-			//const unsigned char* category = sqlite3_column_text(stmt, 2);
-			//printf("%d: %s\t%.2lf\t%s\n",(row_count+1), name, rating, category);
 			printf("%d: %d, %s, %lf, %s\n",printNum, restaurants[row_count].restaurant_no, restaurants[row_count].nameAdr, restaurants[row_count].rating_avg, restaurants[row_count].categoryAdr);
 			printNum++;
 			rc = sqlite3_step(stmt);
@@ -197,13 +164,6 @@ struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category) {
 	printf("\n");
 	sqlite3_finalize(stmt);
 
-	//======================
-	//printf("확인합니다. \n");
-	//for (int i = 0; i < 5; i++) {
-	//	printf("%d:%d, %s, %lf, %s\n", i, restaurants[i].restaurant_no, restaurants[i].name, restaurants[i].rating_avg, restaurants[i].category);
-
-	//}
-
 	while (1) {
 		printf("방문하실 식당 번호를 입력해 주세요: ");
 		int selection;
@@ -215,34 +175,15 @@ struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category) {
 			struct Restaurant* selectedRestaurant = malloc(sizeof(struct Restaurant));
 
 			selectedRestaurant->restaurant_no = restaurants[selection - 1].restaurant_no;
-
 			selectedRestaurant->nameAdr = restaurants[selection - 1].nameAdr;
 			strcpy(selectedRestaurant->name, restaurants[selection - 1].name);
-			//selectedRestaurant->_name = restaurants[selection - 1]._name;
-			//strcpy(selectedRestaurant->_name, selectedRestaurant->name);
-
 			selectedRestaurant->rating_avg = restaurants[selection - 1].rating_avg;
-
 			selectedRestaurant->categoryAdr = restaurants[selection - 1].categoryAdr;
-			//selectedRestaurant->_category = restaurants[selection - 1]._category;
 			strcpy(selectedRestaurant->category, restaurants[selection - 1].category);
-			//strcpy(selectedRestaurant->_category, selectedRestaurant->category);
-
-			//selectedRestaurant.restaurant_no = restaurants[selection - 1].restaurant_no;
-			//selectedRestaurant.name = restaurants[selection - 1].name;
-			//selectedRestaurant.rating_avg = restaurants[selection - 1].rating_avg;
-			//selectedRestaurant.category = restaurants[selection - 1].category;
-			//free(restaurants);
-
-			//printf("%d, %s, %lf, %s\n", restaurants[0].restaurant_no, restaurants[0].name, restaurants[0].rating_avg, restaurants[0].category);
-
-			//printf("번호: %d, 이름: %s, 점수: %lf, 카테고리: %s\n", restaurants[selection - 1].restaurant_no, restaurants[selection - 1].name, restaurants[selection - 1].rating_avg, restaurants[selection - 1].category);
 
 			return selectedRestaurant;
-
 		}
 	}
-
 }
 
 
