@@ -187,9 +187,6 @@ struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category) {
 }
 
 
-
-
-
 //testSelectRestaurant(sqlite3* db) {
 //	sqlite3_stmt* stmt;
 //	const char* select_query = "SELECT * FROM restaurant;";
