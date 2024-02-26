@@ -1,7 +1,9 @@
 #include <sqlite3.h>
 #include <stdio.h>
-
+#include <locale.h>
 int selectData(sqlite3* db) {
+    setlocale(LC_ALL, "ko_KR.UTF-8");
+
     sqlite3_stmt* stmt;
     const char* select_query = "SELECT * FROM restaurant;";
 
@@ -34,8 +36,12 @@ int selectData(sqlite3* db) {
 }
 
 int main() {
+
+
+    setlocale(LC_ALL, "ko_KR.UTF-8");
+
     sqlite3* db;
-    int result = sqlite3_open("restaurants.db", &db);
+    int result = sqlite3_open("test.db", &db);
 
     if (result != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
