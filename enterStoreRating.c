@@ -18,7 +18,7 @@ struct Restaurant {
 };
 
 void enterStoreRating(struct Restaurant* selectedRestaurant, char *memberId) {
-
+	printf("여기서도 꺠지냐??? %s\n", memberId);
 	sqlite3* db = openDataBase(DBNAME);
 	int rating;
 	char content[MAX_CONTENT_LENGTH];
@@ -36,7 +36,63 @@ void enterStoreRating(struct Restaurant* selectedRestaurant, char *memberId) {
 	// restaurant 테이블 업데이트
 	// ratingsum에 rating 추가, people + 1, rating_avg 재계산
 	// 변수로 내부에 다 받아서 한 번에 업데이트 해주기 
-	sqlite3_close(db);
+
+	//레스토랑 테이블 업데이트 
+	int ogRestNo;
+	int ogRatingSum;
+	int ogPeople;
+	double ogRatingAvg;
+
+	sqlite3_stmt* stmt;
+
+	const char* load_query =
+		"SELECT restaurant_no, rating_sum, people, rating_avg "
+		"FROM restaurant "
+		"WHERE restaurant_no = ?;";
+
+	int rc = sqlite3_prepare_v2(db, load_query, -1, &stmt, 0);
+	printf("쿼리문 준비 완료=============================\n");
+	if (rc != SQLITE_OK) {
+		printf("구문 준비에 실패했습니다.");
+		fprintf(stderr, "Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+		return;
+	}
+	printf("텍스트 바인딩 시작====================================\n");
+	printf("이건 찍을 수 있어? %d", selectedRestaurant->restaurant_no);
+	int bindNum = selectedRestaurant->restaurant_no;
+	sqlite3_bind_int(stmt, 1, selectedRestaurant->restaurant_no, -1, SQLITE_STATIC);
+	//sqlite3_bind_int(stmt, 1, bindNum, -1, SQLITE_STATIC);
+	printf("텍스트 바인딩 완료====================================\n");
+	rc = sqlite3_step(stmt);
+	printf("=======여기로 넘어오긴 해 1?=====\n");
+
+	if (rc == SQLITE_ROW) {
+		printf("=======여기로 넘어오긴 해 2?=====\n");
+		while (rc == SQLITE_ROW) {
+			ogRestNo = sqlite3_column_int(stmt, 0);
+			printf("\t%d", ogRestNo);
+			ogRatingSum = sqlite3_column_int(stmt, 1);
+			printf("\t%d", ogRatingSum);
+			ogPeople = sqlite3_column_int(stmt, 2);
+			printf("\t%d", ogPeople);
+			ogRatingAvg = sqlite3_column_double(stmt, 3);
+			printf("\t%lf", ogRatingAvg);
+
+			rc = sqlite3_step(stmt);
+		}
+	}
+	else if (rc == SQLITE_DONE) {
+		printf("결과가 없습니다.\n");
+	}
+	else {
+		fprintf(stderr, "데이터를 가져오는 데 실패했습니다: %s\n", sqlite3_errmsg(db));
+	}
+
+	printf("로오오오오오오오오오오딩==================================\n");
+	printf("%d, %d, %d, %lf", ogRestNo, ogRatingSum, ogPeople, ogRatingAvg);
+	printf("로오오오오오오오오오오딩==================================\n");
+
+	//sqlite3_close(db);
 }
 
 printRatingInfo(struct Restaurant* selectedRestaurant) {
@@ -105,21 +161,15 @@ getSelectedContent(char* restName) {
 
 //review_id, create_time, rating, content, member_id, restaurant_no
 int insertStoreRating(sqlite3* db, char *memberId, int rating, char* content, int restaurant_no) {
-
+	printf("\t%s 멤버 아이디 왜 깨지냐!!!!\n", memberId);
 	time_t currentTime = time(NULL);
 	char timeString[20];
 	strftime(timeString, sizeof(timeString),"%Y-%m-%d %H:%M:%S", localtime(&currentTime));
-	printf("여기인가3\n");
 
-	char sql[150];
+	char sql[300];
 	char* err_msg = NULL;
-	printf("여기인가4\n");
-
 	sprintf(sql, "INSERT INTO restaurant_review (create_time, rating, content, member_id, restaurant_no) VALUES('%s', '%d', '%s', '%s', '%d');", timeString, rating, content, memberId,restaurant_no);
-	printf("여기인가5\n");
-
 	int rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
-	printf("여기인가6\n");
 
 	if (rc != SQLITE_OK)
 	{

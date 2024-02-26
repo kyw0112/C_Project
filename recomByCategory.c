@@ -7,7 +7,6 @@
 #include <ctype.h>
 
 #define DBNAME "test.db"
-#define MEMBERID "test1"
 
 struct Restaurant {
 	int restaurant_no;
@@ -22,8 +21,13 @@ void selectJoinReview(sqlite3* db, const char* category);
 struct Restaurant* selectFromRestaurant(sqlite3* db, const char* category);
 
 void recomByCategory(char * userId) {
-	char* id = MEMBERID; //로그인한 유저의 아이디를 받는다고 가정
+	char* id = userId; //로그인한 유저의 아이디를 받는다고 가정
 
+	//char id[200];
+	//strcpy(id, userId);
+
+
+	printf("카테고리 추천 부분의 유저 아이디 확인: %s", id);
 	sqlite3* db = openDataBase(DBNAME);
 	int condition = 1;
 
@@ -45,8 +49,8 @@ void recomByCategory(char * userId) {
 				selectedRestaurant = selectFromRestaurant(db, "한식");
 				////해당 데이터에 대한 평가 로직 수행
 				//printf("잘 찍히나? 이름: %s, 평점: %lf, 분류: %s\n", selectedRestaurant->name, selectedRestaurant->rating_avg, selectedRestaurant->category);
-				printf("여기인가1\n");
-				enterStoreRating(selectedRestaurant);
+				//enterStoreRating(selectedRestaurant, id);
+				enterStoreRating(selectedRestaurant, id);
 
 				return;
 			case 2:
