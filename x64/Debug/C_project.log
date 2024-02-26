@@ -1,0 +1,4 @@
+﻿  signIn.c
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\signIn.c(63,9): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\signIn.c(74,13): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C_project.vcxproj -> C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\x64\Debug\C_project.exe
