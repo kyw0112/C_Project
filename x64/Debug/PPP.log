@@ -1,0 +1,4 @@
+﻿  recomByStarPerDist.c
+C:\c_basic\PPP\recomByStarPerDist.c(70,44): warning C4013: 'strlen'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\c_basic\PPP\recomByStarPerDist.c(71,15): warning C4013: 'strcpy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  PPP.vcxproj -> C:\c_basic\PPP\x64\Debug\PPP.exe
