@@ -1,0 +1,49 @@
+﻿  enterStoreRating.c
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(50,21): warning C4133: '함수': 'sqlite3 *'과(와) 'TOUPDATERESTAURANT *' 사이의 형식이 호환되지 않습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(50,23): warning C4020: 'updateRestaurant': 실제 매개 변수가 너무 많습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(80,18): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(81,18): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(111,27): warning C4013: 'isKoreanWhiteSpace'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(125,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(134,64): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(138,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(168,3): warning C4033: 'loadOgData'은(는) 값을 반환해야 합니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(172,64): warning C4020: 'sqlite3_bind_int': 실제 매개 변수가 너무 많습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(212,32): warning C4028: 정식 매개 변수 1이(가) 선언과 다릅니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(212,77): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
+  recomByCategory.c
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(76,18): warning C4013: 'enterStoreRating'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(98,3): warning C4033: 'selectFromRestaurant'은(는) 값을 반환해야 합니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(120,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(124,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(157,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(160,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(150,7): warning C4101: 'input' :참조되지 않은 지역 변수입니다.
+  restInput.c
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(45,10): warning C4098: 'restInput': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(54,16): warning C4133: '함수': 'FILE *'과(와) 'const char *const ' 사이의 형식이 호환되지 않습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(57,11): warning C4047: 'return': 'sqlite3 *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(102,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(115,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(137,18): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(138,18): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(194,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(197,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(200,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(203,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(206,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(209,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(212,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(215,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(218,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(221,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(224,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(227,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(301,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(309,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  코드를 생성하고 있습니다...
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\restInput.c(320): warning C4715: 'insertData': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\recomByCategory.c(165): warning C4715: 'selectFromRestaurant': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(148): warning C4715: 'insertStoreRating': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\enterStoreRating.c(210): warning C4715: 'loadOgData': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  C_project.vcxproj -> C:\Users\TECH2-07\Desktop\c_project\jjinCp\C_project\Debug\C_project.exe

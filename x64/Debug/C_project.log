@@ -1,0 +1,23 @@
+﻿  main.c
+C:\Users\김병준\Downloads\1차최종\main.c(118,9): warning C4013: 'signUp'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(120,9): warning C4013: 'signIn'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(107,7): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\김병준\Downloads\1차최종\main.c(151,13): warning C4013: 'restOutput'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(157,19): warning C4013: 'filterByCategory'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(139,7): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\김병준\Downloads\1차최종\main.c(194,18): warning C4013: 'recomByCategory'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(199,21): warning C4013: 'recomByStarPerDist'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(203,18): warning C4013: 'recomByPosition'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(181,7): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\김병준\Downloads\1차최종\main.c(253,36): warning C4013: 'searchmember'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(256,17): warning C4013: 'follow_member'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(266,20): warning C4013: 'display_followers'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(270,20): warning C4013: 'display_following'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(275,24): warning C4013: 'recommend_restaurants'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(240,7): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\김병준\Downloads\1차최종\main.c(253,1): warning C4047: '초기화 중': 'char *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\김병준\Downloads\1차최종\main.c(339,12): warning C4013: 'restInput'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(351,16): warning C4013: 'recommendMenu'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(363,10): warning C4013: 'signOut'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\김병준\Downloads\1차최종\main.c(326,7): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C_project.vcxproj -> C:\Users\김병준\Downloads\1차최종\x64\Debug\C_project.exe
